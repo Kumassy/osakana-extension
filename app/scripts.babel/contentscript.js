@@ -183,40 +183,12 @@
     }, function(items) {
       const username = items.username;
       if (items.username === '') {
-        // TODO show error
+        alert('[osakana-extension] Please set your username. Go to settings for this extension');
         return;
       }
-
-      let userColumn = -1;
-      const headtr = document.querySelector('thead tr');
-      const name1 = headtr.children[1].textContent;
-      const name2 = headtr.children[2].textContent;
-      if (name1 === `${username} state`) {
-        userColumn = 1;
-      } else if (name2 === `${username} state`) {
-        userColumn = 2;
-      }
-      if (userColumn === -1) {
-        // TODO show error
-        return;
-      }
-
 
       const tbody = document.querySelector('table tbody');
       const rows = Array.from(tbody.children);
-      // if need swap
-      if (userColumn === 2) {
-        headtr.children[1].textContent = name2;
-        headtr.children[2].textContent = name1;
-
-        rows.forEach((row) => {
-          const state1 = row.children[1].textContent;
-          const state2 = row.children[2].textContent;
-
-          row.children[1].textContent = state2;
-          row.children[2].textContent = state1;
-        });
-      }
 
       rows.sort((a, b) => {
         const _a = parseInt(a.children[0].textContent);
@@ -231,7 +203,6 @@
         return 0;
       });
 
-
       // update dom
       while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
@@ -239,6 +210,34 @@
       rows.forEach((row) => {
         tbody.appendChild(row);
       });
+
+
+      let userColumn = -1;
+      const headtr = document.querySelector('thead tr');
+      const name1 = headtr.children[1].textContent;
+      const name2 = headtr.children[2].textContent;
+      if (name1 === `${username} state`) {
+        userColumn = 1;
+      } else if (name2 === `${username} state`) {
+        userColumn = 2;
+      }
+      if (userColumn === -1) {
+        return;
+      }
+
+      // if need swap
+      if (userColumn === 2) {
+        headtr.children[1].textContent = name2;
+        headtr.children[2].textContent = name1;
+
+        rows.forEach((row) => {
+          const state1 = row.children[1].textContent;
+          const state2 = row.children[2].textContent;
+
+          row.children[1].textContent = state2;
+          row.children[2].textContent = state1;
+        });
+      }
     });
   }
 })();
