@@ -28,7 +28,7 @@ gulp build
 
 
 ## 自分でビルドしないでインストール
-https://github.com/Kumassy/osakana-extension/archive/v0.01.zip
+https://github.com/Kumassy/osakana-extension/archive/v0.0.2.zip
 をダウンロードして `app.crx` を取り出す。
 
 「メニュー」→「その他のツール」→「拡張機能」  
